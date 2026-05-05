@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数字人力资源管理 - 字节跳动职级与薪酬体系变革</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===========================================
+       VIEWPORT FITTING: MANDATORY BASE STYLES
+       =========================================== */
+    html, body {
+        height: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+    }
+
+    .slide {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .slide-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-height: 100%;
+        overflow: hidden;
+        padding: var(--slide-padding);
+    }
+
+    :root {
+        --title-size: clamp(1.5rem, 5vw, 4rem);
+        --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+        --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+        --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+        --small-size: clamp(0.65rem, 1vw, 0.875rem);
+        --slide-padding: clamp(0.75rem, 3vw, 2.5rem);
+        --content-gap: clamp(0.5rem, 2vw, 2rem);
+        --element-gap: clamp(0.25rem, 1vw, 1rem);
+
+        /* Style B Colors */
+        --bg-light: #f5f5f7;
+        --bg-card: #ffffff;
+        --text-primary: #1d1d1f;
+        --text-secondary: #86868b;
+        --accent: #0071e3;
+        --accent-secondary: #06c149;
+        --accent-orange: #ff9500;
+    }
+
+    body {
+        font-family: 'Inter', 'Noto Serif SC', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--bg-light);
+        color: var(--text-primary);
+    }
+
+    /* ===========================================
+       TYPOGRAPHY
+       =========================================== */
+    .hero-title {
+        font-size: clamp(48px, 10vw, 100px);
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+    }
+
+    .h2-title {
+        font-size: clamp(20px, 3.5vw, 32px);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+    }
+
+    .h3-title {
+        font-size: clamp(16px, 2vw, 22px);
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .body-text {
+        font-size: var(--body-size);
+        line-height: 1.6;
+        color: var(--text-secondary);
+    }
+
+    .small-text {
+        font-size: var(--small-size);
+        color: var(--text-secondary);
+    }
+
+    /* ===========================================
+       LAYOUT HELPERS
+       =========================================== */
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .max-width {
+        max-width: min(90vw, 1200px);
+        margin: 0 auto;
+    }
+
+    .max-width-narrow {
+        max-width: min(90vw, 900px);
+        margin: 0 auto;
+    }
+
+    /* ===========================================
+       CARDS & CONTAINERS
+       =========================================== */
+    .card {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: clamp(20px, 3vw, 32px);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+
+    .card-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .card-link:hover .card {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 113, 227, 0.15);
+    }
+
+    .card-elevated {
+        background: var(--bg-card);
+        border-radius: 24px;
+        padding: clamp(32px, 5vw, 56px);
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ===========================================
+       GRIDS
+       =========================================== */
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(16px, 3vw, 32px);
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(16px, 3vw, 32px);
+    }
+
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(12px, 2vw, 24px);
+    }
+
+    @media (max-width: 900px) {
+        .grid-2, .grid-3, .grid-4 {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ===========================================
+       METRICS & DATA
+       =========================================== */
+    .metric-box {
+        text-align: center;
+        padding: clamp(20px, 3vw, 36px);
+    }
+
+    .metric-value {
+        font-size: clamp(40px, 8vw, 72px);
+        font-weight: 700;
+        color: var(--text-primary);
+        line-height: 1;
+    }
+
+    .metric-value.accent {
+        color: var(--accent);
+    }
+
+    .metric-value.success {
+        color: var(--accent-secondary);
+    }
+
+    .metric-label {
+        font-size: clamp(12px, 1.5vw, 16px);
+        color: var(--text-secondary);
+        margin-top: 12px;
+        font-weight: 400;
+    }
+
+    /* ===========================================
+       COMPARISON
+       =========================================== */
+    .comparison-box {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: clamp(24px, 4vw, 40px);
+        text-align: center;
+    }
+
+    .comparison-box.highlight {
+        box-shadow: 0 8px 48px rgba(0, 113, 227, 0.15);
+        border: 2px solid var(--accent);
+    }
+
+    .comparison-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+    }
+
+    .comparison-value {
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 700;
+    }
+
+    .comparison-desc {
+        font-size: clamp(12px, 1.5vw, 14px);
+        color: var(--text-secondary);
+        margin-top: 12px;
+    }
+
+    /* ===========================================
+       TIMELINE
+       =========================================== */
+    .timeline {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(16px, 2.5vw, 28px);
+    }
+
+    .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(16px, 2.5vw, 28px);
+    }
+
+    .timeline-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        margin-top: 6px;
+        flex-shrink: 0;
+    }
+
+    .timeline-content {
+        flex: 1;
+    }
+
+    /* ===========================================
+       LISTS
+       =========================================== */
+    .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(8px, 1.5vh, 14px);
+    }
+
+    .feature-list li {
+        font-size: var(--body-size);
+        line-height: 1.5;
+        padding-left: clamp(18px, 2.5vw, 28px);
+        position: relative;
+    }
+
+    .feature-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+
+    /* ===========================================
+       ANIMATIONS
+       =========================================== */
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.92);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .animate-fade-up {
+        opacity: 0;
+        animation: fadeUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    .animate-scale-in {
+        opacity: 0;
+        animation: scaleIn 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+
+    /* ===========================================
+       NAVIGATION
+       =========================================== */
+    .nav-dots {
+        position: fixed;
+        right: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 100;
+    }
+
+    /* Logo header */
+    .logo-header {
+        position: fixed;
+        top: 32px;
+        left: 40px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+    }
+
+    .logo-header:hover {
+        opacity: 1;
+    }
+
+    .logo-img {
+        width: clamp(36px, 4vw, 48px);
+        height: clamp(36px, 4vw, 48px);
+        object-fit: contain;
+        border-radius: 4px;
+    }
+
+    .logo-text {
+        font-size: clamp(10px, 1.2vw, 14px);
+        font-weight: 500;
+        color: var(--text-secondary);
+        letter-spacing: 0.05em;
+    }
+
+    /* Cover header with logo and presenter */
+    .cover-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: clamp(40px, 8vw, 80px);
+      padding: 0 clamp(20px, 4vw, 60px);
+    }
+
+    .cover-logo {
+      width: clamp(60px, 8vw, 80px);
+      height: clamp(60px, 8vw, 80px);
+      object-fit: contain;
+    }
+
+    .cover-presenter {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .cover-presenter-label {
+      font-size: clamp(11px, 1.2vw, 14px);
+      color: var(--text-secondary);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cover-presenter-names {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Presenter info */
+    .presenter-info {
+        position: fixed;
+        top: 32px;
+        right: 120px;
+        z-index: 100;
+        text-align: right;
+    }
+
+    .presenter-label {
+        font-size: clamp(9px, 1vw, 11px);
+        color: var(--text-secondary);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+    }
+
+    .presenter-names {
+        font-size: clamp(12px, 1.5vw, 16px);
+        font-weight: 500;
+        color: var(--text-primary);
+    }
+
+    .nav-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--text-secondary);
+        opacity: 0.3;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .nav-dot:hover {
+        opacity: 0.6;
+    }
+
+    .nav-dot.active {
+        opacity: 1;
+        background: var(--accent);
+        transform: scale(1.3);
+    }
+
+    /* ===========================================
+       PAGE INDICATOR
+       =========================================== */
+    .page-indicator {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-secondary);
+        z-index: 100;
+    }
+
+    /* ===========================================
+       SECTION TAG
+       =========================================== */
+    .section-tag {
+        display: inline-block;
+        font-size: clamp(10px, 1.2vw, 12px);
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        padding: 8px 16px;
+        border: 1px solid var(--accent);
+        border-radius: 20px;
+        margin-bottom: 24px;
+    }
+
+    /* ===========================================
+       RESPONSIVE
+       =========================================== */
+    @media (max-height: 700px) {
+        :root {
+            --slide-padding: clamp(0.75rem, 3vw, 2rem);
+            --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+        }
+    }
+
+    @media (max-height: 600px) {
+        .nav-dots {
+            display: none;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .grid-2, .grid-3, .grid-4 {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.2s !important;
+        }
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
+    /* ===========================================
+       SPECIAL STYLES
+       =========================================== */
+    .quote-box {
+        border-left: 4px solid var(--accent);
+        padding-left: clamp(20px, 3vw, 32px);
+        font-size: clamp(18px, 2.5vw, 26px);
+        font-style: italic;
+        color: var(--text-primary);
+        line-height: 1.5;
+    }
+
+    .highlight-text {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .divider {
+        width: 60px;
+        height: 2px;
+        background: var(--accent);
+        margin: clamp(16px, 2.5vw, 28px) auto;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+        width: 100%;
+        height: 6px;
+        background: #e8e8ed;
+        border-radius: 3px;
+        overflow: hidden;
+        margin-top: 12px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        transition: width 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .progress-fill.blue { background: var(--accent); }
+    .progress-fill.green { background: var(--accent-secondary); }
+    .progress-fill.orange { background: var(--accent-orange); }
+
+    /* Rank comparison visual */
+    .rank-compare {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(12px, 3vw, 32px);
+        flex-wrap: wrap;
+    }
+
+    .rank-box {
+        padding: clamp(20px, 3vw, 36px);
+        border-radius: 16px;
+        text-align: center;
+        min-width: 120px;
+    }
+
+    .rank-old {
+        background: #f0f0f2;
+        opacity: 0.7;
+    }
+
+    .rank-new {
+        background: linear-gradient(135deg, rgba(0, 113, 227, 0.1), rgba(0, 113, 227, 0.05));
+        border: 2px solid rgba(0, 113, 227, 0.2);
+    }
+
+    .rank-number {
+        font-size: clamp(24px, 4vw, 40px);
+        font-weight: 700;
+    }
+
+    .rank-label {
+        font-size: clamp(10px, 1.2vw, 12px);
+        color: var(--text-secondary);
+        margin-top: 8px;
+    }
+
+    .arrow-icon {
+        font-size: clamp(24px, 4vw, 40px);
+        color: var(--accent);
+    }
+
+    /* Table styles */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: clamp(16px, 2vw, 24px) 0;
+    }
+
+    .table-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-container::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.05);
+        border-radius: 3px;
+    }
+
+    .table-container::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2);
+        border-radius: 3px;
+    }
+
+    .data-table {
+        width: 100%;
+        min-width: 500px;
+        border-collapse: collapse;
+        font-size: clamp(12px, 1.4vw, 15px);
+    }
+
+    .data-table th {
+        background: rgba(0, 113, 227, 0.08);
+        padding: clamp(12px, 1.5vw, 16px);
+        text-align: left;
+        font-weight: 600;
+        color: var(--text-primary);
+        border-bottom: 2px solid rgba(0, 113, 227, 0.2);
+    }
+
+    .data-table td {
+        padding: clamp(10px, 1.5vw, 14px);
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+        vertical-align: middle;
+    }
+
+    .data-table tr:hover td {
+        background: rgba(0, 113, 227, 0.03);
+    }
+
+    /* Theory card */
+    .theory-card {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: clamp(24px, 4vw, 40px);
+        height: 100%;
+    }
+
+    .theory-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, var(--accent), #5eb5ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    /* Company comparison */
+    .company-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: clamp(12px, 2vw, 20px) 0;
+        border-bottom: 1px solid #e8e8ed;
+    }
+
+    .company-row:last-child {
+        border-bottom: none;
+    }
+
+    .company-name {
+        font-weight: 600;
+        font-size: clamp(14px, 1.8vw, 18px);
+        min-width: 100px;
+    }
+
+    .company-rank {
+        font-size: clamp(12px, 1.5vw, 16px);
+        color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===========================================
+     SLIDE 1: 封面/标题页
+     =========================================== -->
+<div class="slide" id="slide-1">
+  <div class="slide-content center-content">
+    <div style="text-align: center; max-width: 900px; margin: 0 auto;">
+      <img src="暨南大学/经济学院院徽.png" alt="暨南大学经济学院" style="width: clamp(120px, 20vw, 200px); height: clamp(120px, 20vw, 200px); object-fit: contain; margin-bottom: clamp(24px, 4vw, 40px); display: block; margin-left: auto; margin-right: auto;">
+      <p style="font-size: clamp(14px, 2vw, 18px); color: var(--text-secondary); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: clamp(16px, 2vw, 24px);">经济学院 · 课程汇报</p>
+      <h1 style="font-size: clamp(40px, 8vw, 80px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 clamp(16px, 2vw, 24px) 0;">数字人力资源管理</h1>
+      <div style="width: 60px; height: 3px; background: var(--accent); margin: 0 auto clamp(16px, 2vw, 24px) auto;"></div>
+      <p style="font-size: clamp(18px, 3vw, 28px); color: var(--text-secondary); font-weight: 400; margin-bottom: clamp(24px, 4vw, 40px);">字节跳动职级与薪酬体系变革分析</p>
+      <p style="font-size: clamp(14px, 2vw, 18px); color: var(--text-secondary); margin-bottom: clamp(32px, 5vw, 56px);">从「激励钝化」到「战功变现」的战略转型</p>
+      <div style="display: flex; justify-content: center; gap: clamp(40px, 8vw, 80px); margin-top: clamp(24px, 4vw, 40px);">
+        <div>
+          <p style="font-size: clamp(10px, 1.2vw, 12px); color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;">汇报人</p>
+          <p style="font-size: clamp(18px, 2.5vw, 24px); font-weight: 600;">刘明杰</p>
+        </div>
+        <div>
+          <p style="font-size: clamp(10px, 1.2vw, 12px); color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;">汇报人</p>
+          <p style="font-size: clamp(18px, 2.5vw, 24px); font-weight: 600;">高锦生</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 2: 目录
+     =========================================== -->
+<div class="slide" id="slide-2">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">议程</p>
+      <h2 class="section-title animate-fade-up delay-1">汇报内容</h2>
+      <div class="grid-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <a href="#slide-5" class="card-link animate-fade-up delay-2">
+          <div class="card">
+            <span class="h3-title" style="color: var(--accent);">01</span>
+            <h3 class="h2-title" style="margin-top: 12px;">变革背景</h3>
+            <p class="body-text" style="margin-top: 12px;">激励钝化、人才流失与外部战争</p>
+          </div>
+        </a>
+        <a href="#slide-10" class="card-link animate-fade-up delay-3">
+          <div class="card">
+            <span class="h3-title" style="color: var(--accent);">02</span>
+            <h3 class="h2-title" style="margin-top: 12px;">职级体系变革</h3>
+            <p class="body-text" style="margin-top: 12px;">从5级10档到L1-L10的架构重塑</p>
+          </div>
+        </a>
+        <a href="#slide-13" class="card-link animate-fade-up delay-4">
+          <div class="card">
+            <span class="h3-title" style="color: var(--accent);">03</span>
+            <h3 class="h2-title" style="margin-top: 12px;">薪酬激励变革</h3>
+            <p class="body-text" style="margin-top: 12px;">带宽扩大、不晋升也涨薪、全球对标</p>
+          </div>
+        </a>
+        <a href="#slide-20" class="card-link animate-fade-up delay-5">
+          <div class="card">
+            <span class="h3-title" style="color: var(--accent);">04</span>
+            <h3 class="h2-title" style="margin-top: 12px;">启示与借鉴</h3>
+            <p class="body-text" style="margin-top: 12px;">理论基础、行业对比与企业实践</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 3: 引言
+     =========================================== -->
+<div class="slide" id="slide-3">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">引言</p>
+      <h2 class="section-title animate-fade-up delay-1">数字经济时代的人力资源挑战</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <p class="body-text animate-fade-up delay-3" style="font-size: clamp(16px, 2vw, 22px); max-width: 800px; margin: 0 auto;">
+        在AI革命与人才战争交织的时代，传统的HR管理体系正面临前所未有的挑战。
+        字节跳动的这次变革，为我们提供了一个绝佳的研究样本。
+      </p>
+      <div class="grid-3 animate-fade-up delay-4" style="margin-top: clamp(40px, 6vw, 72px);">
+        <div class="metric-box">
+          <div class="metric-value accent">AI</div>
+          <div class="metric-label">技术革命</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value accent">Global</div>
+          <div class="metric-label">全球竞争</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-value accent">Talent</div>
+          <div class="metric-label">人才战争</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 4: 案例引入
+     =========================================== -->
+<div class="slide" id="slide-4">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">案例</p>
+      <h2 class="section-title animate-fade-up delay-1">一个28岁工程师的离职</h2>
+      <div class="card animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <p class="h3-title" style="font-style: italic; color: var(--text-primary);">
+          「在字节，我不晋升就几乎不涨薪。<br>
+          但外面愿意为我的战功立刻付钱。」
+        </p>
+        <div class="divider"></div>
+        <div class="grid-2">
+          <div>
+            <p class="small-text" style="margin-bottom: 8px;">员工档案</p>
+            <p class="body-text">28岁 · 字节SEED团队 · 两年多经验</p>
+          </div>
+          <div>
+            <p class="small-text" style="margin-bottom: 8px;">offer对比</p>
+            <p class="body-text">腾讯：L8，薪酬翻倍</p>
+            <p class="body-text">创业公司：4%期权，A轮融资</p>
+          </div>
+        </div>
+      </div>
+      <div class="animate-fade-up delay-3" style="margin-top: clamp(24px, 4vw, 40px);">
+        <p class="h3-title" style="color: var(--accent);">最终选择：创业公司</p>
+        <p class="body-text" style="margin-top: 12px;">原因：战功能立刻变现</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 5: 激励钝化
+     =========================================== -->
+<div class="slide" id="slide-5">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">核心问题</p>
+      <h2 class="section-title animate-fade-up delay-1">激励钝化</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(32px, 5vw, 56px);">
+        <p class="body-text" style="font-size: clamp(18px, 2.5vw, 26px); text-align: center;">
+          <span class="highlight-text">不晋升 ≈ 不涨薪</span>
+        </p>
+        <p class="body-text" style="margin-top: 20px; text-align: center;">
+          在字节的旧体系里，这是不成文的规则。<br>
+          你的贡献可以很大，但只要级别没动，钱就基本不动。
+        </p>
+      </div>
+      <div class="animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 56px);">
+        <p class="h3-title" style="color: var(--accent);">当激励钝化，最能打的人是最先走的</p>
+        <p class="body-text" style="margin-top: 12px;">因为他们收到的offer最多</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 6: 人才流失现状
+     =========================================== -->
+<div class="slide" id="slide-6">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">背景</p>
+      <h2 class="section-title animate-fade-up delay-1">人才流失现状</h2>
+      <div class="grid-3 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <div class="metric-value accent">30+</div>
+          <div class="metric-label">字节系AI创业公司已获融资</div>
+          <p class="body-text" style="margin-top: 16px;">包括前剪映商业化负责人陈冕、前视觉技术负责人王长虎等</p>
+        </div>
+        <div class="card">
+          <div class="metric-value accent">SEED</div>
+          <div class="metric-label">大模型研发核心团队</div>
+          <p class="body-text" style="margin-top: 16px;">核心技术岗2025年出现明显人才流失</p>
+        </div>
+        <div class="card">
+          <div class="metric-value accent">3月</div>
+          <div class="metric-label">培养 vs 挖人时间对比</div>
+          <p class="body-text" style="margin-top: 16px;">「你花4.2年培养一个成熟的AI工程师，但只要3个月就能从别人那里挖来一个」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 7: 外部人才战争
+     =========================================== -->
+<div class="slide" id="slide-7">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">背景</p>
+      <h2 class="section-title animate-fade-up delay-1">外部人才战争</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <p class="body-text animate-fade-up delay-3" style="font-size: clamp(16px, 2vw, 22px); max-width: 700px; margin: 0 auto; text-align: center;">
+        竞争对手的薪酬攻势：<br>
+        <span class="highlight-text">一倍一倍地翻</span>
+      </p>
+      <div class="card animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 56px); text-align: center;">
+        <p class="h3-title">问题的本质</p>
+        <div class="divider"></div>
+        <p class="body-text" style="font-size: clamp(16px, 2vw, 20px);">
+          你留不住一个被全网竞价的人才，<br>
+          除非你让自己的激励体系也参与竞价。
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 8: 为什么必须改变
+     =========================================== -->
+<div class="slide" id="slide-8">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">背景</p>
+      <h2 class="section-title animate-fade-up delay-1">为什么字节必须改变</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <span class="h3-title" style="color: var(--accent);">业务高速增长期</span>
+          <p class="body-text" style="margin-top: 16px;">晋升机会多，大家排队也能排到</p>
+          <p class="small-text" style="margin-top: 12px; color: var(--accent-secondary);">→ 旧体系问题不大</p>
+        </div>
+        <div class="card">
+          <span class="h3-title" style="color: var(--accent-orange);">增长放缓期</span>
+          <p class="body-text" style="margin-top: 16px;">晋升名额变少，能打的人发现钱和"还不错"的人拉不开差距</p>
+          <p class="small-text" style="margin-top: 12px; color: #ff3b30;">→ 问题爆发</p>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(24px, 4vw, 40px); text-align: center;">
+        <p class="h3-title">2025年12月19日</p>
+        <p class="body-text" style="margin-top: 12px;">字节跳动以一封全员邮件启动了薪酬激励与职级体系的双重变革</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 9: 旧体系的问题
+     =========================================== -->
+<div class="slide" id="slide-9">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">职级变革</p>
+      <h2 class="section-title animate-fade-up delay-1">旧体系的问题</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <h3 class="h3-title">5级10档</h3>
+          <p class="body-text" style="margin-top: 16px;">1-1 至 5-2，共10个细分档位</p>
+          <ul class="feature-list" style="margin-top: 20px;">
+            <li>低级职级过于细分（1-1、1-2）</li>
+            <li>晋升"横杠"心理暗示明显</li>
+            <li>天花板容易触顶（5-2后即高管）</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h3-title">核心弊病</h3>
+          <ul class="feature-list" style="margin-top: 20px;">
+            <li>职级拥堵：2-2、3-1层级长期停滞</li>
+            <li>能力标准与实际水平脱节</li>
+            <li>无法精准区分复杂业务的人才要求</li>
+            <li>海外招聘缺乏国际化语言</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 10: 新体系 L1-L10
+     =========================================== -->
+<div class="slide" id="slide-10">
+  <div class="slide-content center-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">职级变革</p>
+      <h2 class="section-title animate-fade-up delay-1">新体系：L1-L10</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="rank-compare animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px);">
+        <div class="rank-box rank-old">
+          <div class="rank-number" style="color: var(--text-secondary);">1-1, 1-2</div>
+          <div class="rank-label">低级细分</div>
+        </div>
+        <div class="arrow-icon">→</div>
+        <div class="rank-box rank-new">
+          <div class="rank-number" style="color: var(--accent);">L1</div>
+          <div class="rank-label">合并统一</div>
+        </div>
+        <div style="width: 40px;"></div>
+        <div class="rank-box rank-old">
+          <div class="rank-number" style="color: var(--text-secondary);">3-1, 3-2</div>
+          <div class="rank-label">中层</div>
+        </div>
+        <div class="arrow-icon">→</div>
+        <div class="rank-box rank-new">
+          <div class="rank-number" style="color: var(--accent);">L4, L5, L6</div>
+          <div class="rank-label">精细分层</div>
+        </div>
+        <div style="width: 40px;"></div>
+        <div class="rank-box rank-new" style="border: 2px solid var(--accent-secondary); background: rgba(6, 193, 73, 0.05);">
+          <div class="rank-number" style="color: var(--accent-secondary);">L10</div>
+          <div class="rank-label">新增顶层</div>
+        </div>
+      </div>
+      <p class="body-text animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 48px); text-align: center;">
+        整体带宽扩大近一倍，为顶尖人才预留独立空间
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 11: 关键变化详解
+     =========================================== -->
+<div class="slide" id="slide-11">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">职级变革</p>
+      <h2 class="section-title animate-fade-up delay-1">关键变化</h2>
+      <div class="grid-3 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">合并低级</h3>
+          <div class="divider"></div>
+          <p class="body-text">1-1与1-2合并为L1</p>
+          <ul class="feature-list" style="margin-top: 16px;">
+            <li>减少低职级晋升的行政成本</li>
+            <li>缓解员工的"晋升焦虑"</li>
+            <li>更强调基础能力夯实</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">拆细中层</h3>
+          <div class="divider"></div>
+          <p class="body-text">贡献多一分还是少一分，一眼就能看出来</p>
+          <ul class="feature-list" style="margin-top: 16px;">
+            <li>更精准的人才评价</li>
+            <li>小步快跑的晋升体验</li>
+            <li>稀释晋升焦虑</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent-secondary);">扩容高层</h3>
+          <div class="divider"></div>
+          <p class="body-text">新增L10天花板</p>
+          <ul class="feature-list" style="margin-top: 16px;">
+            <li>对标阿里P10+、腾讯12级+</li>
+            <li>吸引行业顶尖"大牛"</li>
+            <li>留足职业发展空间</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 12: 新旧职级对比
+     =========================================== -->
+<div class="slide" id="slide-12">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">职级变革</p>
+      <h2 class="section-title animate-fade-up delay-1">新旧职级对比</h2>
+      <div class="card animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="grid-2">
+          <div>
+            <p class="h3-title" style="margin-bottom: 20px;">旧体系</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: #f5f5f7; border-radius: 8px;">
+                <span>1-1, 1-2</span>
+                <span class="small-text">初级</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: #f5f5f7; border-radius: 8px;">
+                <span>2-1, 2-2</span>
+                <span class="small-text">中级</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: #f5f5f7; border-radius: 8px;">
+                <span>3-1, 3-2</span>
+                <span class="small-text">资深</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: #f5f5f7; border-radius: 8px;">
+                <span>4-1, 4-2</span>
+                <span class="small-text">专家</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: #f5f5f7; border-radius: 8px;">
+                <span>5-1, 5-2</span>
+                <span class="small-text">高级</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p class="h3-title" style="margin-bottom: 20px; color: var(--accent);">新体系</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: rgba(0, 113, 227, 0.08); border-radius: 8px; border: 1px solid rgba(0, 113, 227, 0.2);">
+                <span>L1</span>
+                <span class="small-text">合并初级</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: rgba(0, 113, 227, 0.08); border-radius: 8px; border: 1px solid rgba(0, 113, 227, 0.2);">
+                <span>L2, L3</span>
+                <span class="small-text">拆分中层</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: rgba(0, 113, 227, 0.08); border-radius: 8px; border: 1px solid rgba(0, 113, 227, 0.2);">
+                <span>L4, L5, L6</span>
+                <span class="small-text">精细分层</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: rgba(0, 113, 227, 0.08); border-radius: 8px; border: 1px solid rgba(0, 113, 227, 0.2);">
+                <span>L7, L8, L9</span>
+                <span class="small-text">高级专家</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 12px 16px; background: rgba(6, 193, 73, 0.08); border-radius: 8px; border: 1px solid rgba(6, 193, 73, 0.2);">
+                <span>L10</span>
+                <span class="small-text" style="color: var(--accent-secondary);">新增顶层</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 13: 薪酬激励加大
+     =========================================== -->
+<div class="slide" id="slide-13">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">薪酬激励大幅加码</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="grid-3 animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px);">
+        <div class="card" style="text-align: center;">
+          <div class="metric-value" style="color: var(--accent); font-size: clamp(2.5rem, 6vw, 4rem);">+35%</div>
+          <div class="metric-label">2025年奖金投入提升</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="metric-value" style="color: var(--accent); font-size: clamp(2.5rem, 6vw, 4rem);">1.5倍</div>
+          <div class="metric-label">调薪投入增幅</div>
+        </div>
+        <div class="card" style="text-align: center;">
+          <div class="metric-value" style="color: var(--accent); font-size: clamp(2.5rem, 6vw, 4rem);">20%+</div>
+          <div class="metric-label">薪酬总包上下限提升</div>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 56px); text-align: center;">
+        <p class="quote-box" style="border: none; padding: 0;">
+          「确保员工薪酬竞争力和激励回报<br>在全球各个市场都领先于头部水平」
+        </p>
+        <div class="divider"></div>
+        <p class="body-text">— 字节跳动2024年12月全员邮件</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 14: 薪酬带宽扩大
+     =========================================== -->
+<div class="slide" id="slide-14">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">薪酬带宽全面扩大</h2>
+      <div class="card animate-fade-up delay-2" style="margin-top: clamp(24px, 4vw, 40px);">
+        <p class="h3-title" style="margin-bottom: 16px;">各职级薪酬总包示例（技术岗）</p>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>职级</th>
+                <th>角色</th>
+                <th>年薪范围</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rank-badge">L1</span></td>
+                <td>校招生/初级</td>
+                <td>40-50万</td>
+                <td>合并原1-1、1-2</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge">L2</span></td>
+                <td>资深工程师</td>
+                <td>60-100万</td>
+                <td>2-2核心主力</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge">L3</span></td>
+                <td>技术专家</td>
+                <td>100-150万</td>
+                <td>可对标阿里P8</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge">L4</span></td>
+                <td>团队Leader</td>
+                <td>150-300万</td>
+                <td>带团队/核心项目</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge">L5</span></td>
+                <td>总监/专家</td>
+                <td>300万+</td>
+                <td>股票期权为主</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top: 20px; padding: 14px; background: rgba(0, 113, 227, 0.05); border-radius: 10px;">
+          <p class="body-text" style="text-align: center;">
+            <span class="highlight-text">提升幅度</span>：2-2技术岗50-80万 → 60-120万(+50%)<br>
+            <span class="highlight-text">核心逻辑</span>：拓宽涨薪空间，减少"晋升瓶颈"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 15: 调薪与奖金
+     =========================================== -->
+<div class="slide" id="slide-15">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">调薪与奖金预算</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <div class="metric-value accent">+1.5×</div>
+          <div class="metric-label">调薪总预算</div>
+          <div class="progress-bar">
+            <div class="progress-fill blue" style="width: 100%;"></div>
+          </div>
+          <p class="body-text" style="margin-top: 16px;">较上个周期大幅增加</p>
+        </div>
+        <div class="card">
+          <div class="metric-value accent">+35%</div>
+          <div class="metric-label">奖金池投入</div>
+          <div class="progress-bar">
+            <div class="progress-fill green" style="width: 85%;"></div>
+          </div>
+          <p class="body-text" style="margin-top: 16px;">2025全年奖金投入比上周期上涨超三成</p>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(24px, 4vw, 40px); text-align: center;">
+        <p class="h3-title">这是一个明显的信号</p>
+        <p class="body-text" style="margin-top: 12px;">调整后会有较多人获得薪资普涨，这是字节为稳住核心人才阵营所做的真金白银的投入</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 16: 不晋升也能涨薪
+     =========================================== -->
+<div class="slide" id="slide-16">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">不晋升也能涨薪</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px); text-align: center;">
+        <p class="h3-title" style="font-size: clamp(20px, 3vw, 32px);">
+          <span class="highlight-text">最狠的一刀</span>
+        </p>
+        <p class="body-text" style="margin-top: 20px; font-size: clamp(16px, 2vw, 22px);">
+          直接把"不晋升≈不涨薪"的挂钩敲碎
+        </p>
+        <div class="divider"></div>
+        <p class="body-text">
+          你只要这个季度打出了战功，<br>
+          哪怕级别没动，钱照加。
+        </p>
+      </div>
+      <div class="animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 48px);">
+        <p class="h3-title" style="color: var(--accent);">对"M级"及以上员工的激励</p>
+        <p class="body-text" style="margin-top: 12px;">M级涵盖公司约60%-70%员工，高上限意味着只要表现处于M里的优秀区间，年终奖也会有实质性增加</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 16: 绩效激励详细数据
+     =========================================== -->
+<div class="slide" id="slide-16">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">2025年绩效激励新政策</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px);">
+        <p class="h3-title" style="margin-bottom: 24px;">年终奖激励月数增加（2025年度）</p>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>绩效等级</th>
+                <th>增加月数</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rank-badge" style="background: var(--accent);">M</span></td>
+                <td>+1.5个月（上限）</td>
+                <td>覆盖面最广，约60-70%员工</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge" style="background: var(--accent);">M+</span></td>
+                <td>+1.5~2.5个月</td>
+                <td>下限+1.5，上限+2.5</td>
+              </tr>
+              <tr>
+                <td><span class="rank-badge" style="background: var(--accent-secondary);">E</span></td>
+                <td>+3~3.5个月</td>
+                <td>高绩效员工，涨幅最大</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top: 24px; padding: 16px; background: rgba(6, 193, 73, 0.08); border-radius: 12px;">
+          <p class="body-text" style="color: var(--accent-secondary); font-weight: 500;">
+            超3个月部分：25%发现金 + 75%发期权/RSU
+          </p>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-4" style="margin-top: clamp(24px, 4vw, 40px);">
+        <p class="h3-title">半年激励计算基数调整</p>
+        <p class="body-text" style="margin-top: 12px;">
+          <span class="highlight-text">E级及以上</span>：计算基数从"月薪" → "月总包"（月薪+月期权）
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 17: RSU与薪酬结构
+     =========================================== -->
+<div class="slide" id="slide-17">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">RSU归属与薪酬结构</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <h3 class="h3-title">RSU发放：4年 → 3年</h3>
+          <div class="divider"></div>
+          <p class="body-text" style="margin-top: 16px;">过去：入职发4年期权，按年归属</p>
+          <p class="body-text" style="margin-top: 8px;">现在：缩短为3年</p>
+          <div style="margin-top: 20px; padding: 16px; background: rgba(6, 193, 73, 0.08); border-radius: 12px;">
+            <p class="body-text" style="color: var(--accent-secondary); font-weight: 500;">归属节奏加快，极大提高人才"变现速度"</p>
+          </div>
+          <p class="small-text" style="margin-top: 12px;">这是针对阿里、腾讯、甚至大模型初创公司的抢人手段</p>
+        </div>
+        <div class="card">
+          <h3 class="h3-title">提高现金占比</h3>
+          <div class="divider"></div>
+          <p class="body-text" style="margin-top: 16px;">过去互联网大厂靠期权"造富"</p>
+          <p class="body-text" style="margin-top: 8px;">当前市场环境下，期权吸引力下降</p>
+          <div style="margin-top: 20px; padding: 16px; background: rgba(0, 113, 227, 0.08); border-radius: 12px;">
+            <p class="body-text" style="color: var(--accent); font-weight: 500;">直接用确定性的现金去对抗不确定性的期权预期</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 18: 全球对标
+     =========================================== -->
+<div class="slide" id="slide-18">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">薪酬变革</p>
+      <h2 class="section-title animate-fade-up delay-1">全球对标</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px); text-align: center;">
+        <p class="quote-box" style="border: none; padding: 0; font-size: clamp(18px, 2.5vw, 28px);">
+          「薪酬水平领先于<br><span class="highlight-text">全球各个市场</span>头部水平」
+        </p>
+        <div class="divider"></div>
+        <p class="body-text">— 字节跳动内部文件（首次提出）</p>
+      </div>
+      <div class="animate-fade-up delay-4" style="margin-top: clamp(32px, 5vw, 48px);">
+        <p class="body-text" style="text-align: center;">
+          背景：字节AI业务（豆包、TIKTOK AI升级）正与<br>
+          <span class="highlight-text">Google、OpenAI、Meta</span> 正面硬刚
+        </p>
+        <p class="h3-title animate-fade-up delay-5" style="margin-top: 20px; text-align: center; color: var(--accent);">
+          既然是全球竞争，就必须用硅谷级别的薪酬标准
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 19: HR战略三转变
+     =========================================== -->
+<div class="slide" id="slide-19">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">理论基础</p>
+      <h2 class="section-title animate-fade-up delay-1">HR战略三转变</h2>
+      <div class="timeline animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="h3-title">从「快」到「稳」</h3>
+            <p class="body-text" style="margin-top: 8px;">早期细分职级是为鼓励快速晋升、快速反馈；现在扁平化的L序列是为长期主义，强调能力的沉淀</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="h3-title">解决激励疲劳</h3>
+            <p class="body-text" style="margin-top: 8px;">通过"职级重排+薪酬区间拓宽"，制造新的激励点，让员工觉得"还有得拼"</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="h3-title">吸引国际人才</h3>
+            <p class="body-text" style="margin-top: 8px;">L1-L10体系更接近Google、Amazon等国际一线科技公司的Rank系统，有利于海外人才对标和流动</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot" style="background: var(--accent-secondary);"></div>
+          <div class="timeline-content">
+            <h3 class="h3-title" style="color: var(--accent-secondary);">AI导向</h3>
+            <p class="body-text" style="margin-top: 8px;">所有资源倾斜，归根结底是为实现2025年AI业务的三大目标（智能上限、UI交互、规模效应）</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 20: 激励理论框架
+     =========================================== -->
+<div class="slide" id="slide-20">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">理论基础</p>
+      <h2 class="section-title animate-fade-up delay-1">激励理论框架</h2>
+      <div class="grid-3 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="theory-card">
+          <div class="theory-icon">期</div>
+          <h3 class="h3-title">期望理论</h3>
+          <div class="divider"></div>
+          <p class="body-text">绩效-努力-结果三连环</p>
+          <p class="body-text" style="margin-top: 12px;">"不晋升也能涨薪"让努力到结果的路径更直接，提升期望值</p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-icon">双</div>
+          <h3 class="h3-title">双因素理论</h3>
+          <div class="divider"></div>
+          <p class="body-text">保健因素 + 激励因素</p>
+          <p class="body-text" style="margin-top: 12px;">基本薪资是保健因素，宽带薪酬、即时激励是激励因素，满足更高层次需求</p>
+        </div>
+        <div class="theory-card">
+          <div class="theory-icon">公</div>
+          <h3 class="h3-title">公平理论</h3>
+          <div class="divider"></div>
+          <p class="body-text">内部公平 + 外部公平</p>
+          <p class="body-text" style="margin-top: 12px;">全球对标解决外部公平，职级重排解决内部公平，减少薪酬倒挂</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 21: 历史参照
+     =========================================== -->
+<div class="slide" id="slide-21">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">理论基础</p>
+      <h2 class="section-title animate-fade-up delay-1">历史参照：商鞅变法</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <h3 class="h3-title" style="margin-bottom: 16px;">公元前356年 · 秦国</h3>
+          <p class="body-text">贵族爵位世袭 → 按战功封爵</p>
+          <div class="divider"></div>
+          <p class="body-text" style="font-style: italic;">"砍一颗，升一级，给田给宅，犯法还能折罪"</p>
+          <p class="body-text" style="margin-top: 16px;">从此秦军士兵把敌人首级绑在腰间继续冲锋</p>
+          <p class="h3-title" style="margin-top: 20px; color: var(--accent);">为什么？</p>
+          <p class="body-text">因为战功立刻就能变现——等不到年底，等不到晋升季，今天砍，明天赏</p>
+        </div>
+        <div class="card" style="background: linear-gradient(135deg, rgba(0, 113, 227, 0.05), rgba(6, 193, 73, 0.05));">
+          <h3 class="h3-title" style="color: var(--accent);">字节的"商鞅变法"</h3>
+          <div class="divider"></div>
+          <p class="body-text" style="font-weight: 500;">让贡献马上变成看得见的回报</p>
+          <div class="divider"></div>
+          <p class="body-text">职级重排 + 薪酬区间拓宽 = 制造新激励点</p>
+          <p class="body-text" style="margin-top: 12px;">不晋升也能涨薪 = 让战功立刻变现</p>
+          <div style="margin-top: 20px; padding: 16px; background: var(--bg-card); border-radius: 12px;">
+            <p class="h3-title" style="font-size: clamp(16px, 2vw, 20px);">机制比人活得久</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 22: 互联网大厂对比
+     =========================================== -->
+<div class="slide" id="slide-22">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">行业对比</p>
+      <h2 class="section-title animate-fade-up delay-1">互联网大厂职级体系</h2>
+      <div class="card animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="company-row">
+          <div class="company-name">字节跳动</div>
+          <div class="company-rank">L1 - L10（新体系）</div>
+        </div>
+        <div class="company-row">
+          <div class="company-name">阿里巴巴</div>
+          <div class="company-rank">P4 - P12（专业序列）</div>
+        </div>
+        <div class="company-row">
+          <div class="company-name">腾讯</div>
+          <div class="company-rank">T1 - T11（技术序列）</div>
+        </div>
+        <div class="company-row">
+          <div class="company-name">百度</div>
+          <div class="company-rank">T5 - T12（技术序列）</div>
+        </div>
+        <div class="company-row">
+          <div class="company-name">Google</div>
+          <div class="company-rank">L3 - L8</div>
+        </div>
+        <div class="company-row">
+          <div class="company-name">Meta</div>
+          <div class="company-rank">E3 - E9</div>
+        </div>
+      </div>
+      <div class="animate-fade-up delay-3" style="margin-top: clamp(24px, 4vw, 40px);">
+        <p class="body-text" style="text-align: center;">
+          <span class="highlight-text">字节L1-L10的十进制命名</span>本身即是一套国际化语言，<br>为海外人才市场提供清晰的职级锚点与薪酬对标依据
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 23: 企业借鉴
+     =========================================== -->
+<div class="slide" id="slide-23">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">企业借鉴</p>
+      <h2 class="section-title animate-fade-up delay-1">可以借鉴的四件事</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">合并初级职级</h3>
+          <p class="body-text" style="margin-top: 12px;">让新人快速进入实战，别在低级别内卷</p>
+        </div>
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">拆细中层</h3>
+          <p class="body-text" style="margin-top: 12px;">让贡献被精准定价，别让优秀的中层被平庸的人淹没</p>
+        </div>
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">设更高天花板</h3>
+          <p class="body-text" style="margin-top: 12px;">否则顶尖人才会自己出去开公司，然后成为你的对手</p>
+        </div>
+        <div class="card">
+          <h3 class="h3-title" style="color: var(--accent);">设立专项激励</h3>
+          <p class="body-text" style="margin-top: 12px;">打破"晋升才涨薪"的死框子，让战功即时变现</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 24: 三个警示
+     =========================================== -->
+<div class="slide" id="slide-24">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">企业借鉴</p>
+      <h2 class="section-title animate-fade-up delay-1">必须警惕的三个坑</h2>
+      <div class="grid-3 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card" style="border-left: 4px solid var(--accent-orange);">
+          <h3 class="h3-title" style="color: var(--accent-orange);">短期主义陷阱</h3>
+          <div class="divider"></div>
+          <p class="body-text">钱给得太快，员工可能只做容易量化的事，基础研究、人才培养没人管</p>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(0, 113, 227, 0.05); border-radius: 8px;">
+            <p class="small-text" style="font-weight: 500;">→ 同时设"长期贡献奖"，平衡长短激励</p>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--accent-orange);">
+          <h3 class="h3-title" style="color: var(--accent-orange);">成本失控</h3>
+          <div class="divider"></div>
+          <p class="body-text">不晋升也涨薪+带宽大幅提高，一旦业务增长放缓，人工成本会压垮利润</p>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(0, 113, 227, 0.05); border-radius: 8px;">
+            <p class="small-text" style="font-weight: 500;">→ 把薪酬增长跟业务增速挂钩，设置浮动机制</p>
+          </div>
+        </div>
+        <div class="card" style="border-left: 4px solid var(--accent-orange);">
+          <h3 class="h3-title" style="color: var(--accent-orange);">薪酬倒挂矛盾</h3>
+          <div class="divider"></div>
+          <p class="body-text">新人高薪进来，老员工心里不平衡</p>
+          <div style="margin-top: 16px; padding: 12px; background: rgba(0, 113, 227, 0.05); border-radius: 8px;">
+            <p class="small-text" style="font-weight: 500;">→ 设立"薪酬保护期"和透明沟通机制</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 25: 变革效果
+     =========================================== -->
+<div class="slide" id="slide-25">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">效果验证</p>
+      <h2 class="section-title animate-fade-up delay-1">变革效果</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(32px, 5vw, 56px);">
+        <div class="card">
+          <div class="metric-value success">-18%</div>
+          <div class="metric-label">SEED团队Q1主动流失率下降</div>
+          <p class="body-text" style="margin-top: 16px;">较上一季度，改革后核心人才流失明显改善</p>
+        </div>
+        <div class="card">
+          <div class="metric-value accent">L8</div>
+          <div class="metric-label">DeepSeek核心研究员郭达雅入职</div>
+          <p class="body-text" style="margin-top: 16px;">网传年薪近亿元，四年后收益或达数亿元</p>
+        </div>
+      </div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(24px, 4vw, 40px); text-align: center;">
+        <p class="h3-title">员工反馈</p>
+        <p class="body-text" style="margin-top: 12px; font-size: clamp(16px, 2vw, 22px);">
+          "新的激励方式让人更有奔头"
+        </p>
+        <p class="small-text" style="margin-top: 12px;">— 内部员工在不同平台的匿名反馈</p>
+      </div>
+      <div class="animate-fade-up delay-4" style="margin-top: clamp(24px, 4vw, 40px); text-align: center;">
+        <p class="h3-title" style="color: var(--accent);">数据背后是人心</p>
+        <p class="body-text" style="margin-top: 8px;">能打的人，愿意留下了</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 26: 对数字经济研究的启示
+     =========================================== -->
+<div class="slide" id="slide-26">
+  <div class="slide-content">
+    <div class="max-width">
+      <p class="section-tag animate-fade-up">启示</p>
+      <h2 class="section-title animate-fade-up delay-1">对数字经济研究的思考</h2>
+      <div class="grid-2 animate-fade-up delay-2" style="margin-top: clamp(24px, 4vw, 40px);">
+        <div class="card">
+          <h3 class="h3-title">数字劳动力市场的变革</h3>
+          <ul class="feature-list" style="margin-top: 16px;">
+            <li>平台经济下的激励机制创新</li>
+            <li>数据驱动的人才定价模型</li>
+            <li>AI对劳动市场的颠覆性影响</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 class="h3-title">核心研究视角</h3>
+          <ul class="feature-list" style="margin-top: 16px;">
+            <li>数字经济时代的劳动契约演变</li>
+            <li>平台型企业的治理结构创新</li>
+            <li>数据要素参与分配的实现路径</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 27: 总结与展望
+     =========================================== -->
+<div class="slide" id="slide-27">
+  <div class="slide-content center-content">
+    <div class="max-width-narrow">
+      <p class="section-tag animate-fade-up">结语</p>
+      <h2 class="section-title animate-fade-up delay-1">数字时代的薪酬治理启示</h2>
+      <div class="divider animate-fade-up delay-2"></div>
+      <div class="card animate-fade-up delay-3" style="margin-top: clamp(40px, 6vw, 72px);">
+        <p class="body-text" style="font-size: clamp(16px, 2vw, 22px); text-align: center; line-height: 1.8;">
+          当一家巨头以如此公开的方式重构人才激励机制，<br>
+          它折射出数字经济时代劳动治理的新趋势。
+        </p>
+        <div class="divider"></div>
+        <p class="h3-title animate-fade-up delay-4" style="text-align: center; color: var(--accent);">
+          在未来的数字经济竞争中，<br>
+          谁能用更精细的激励机制激活人才价值，<br>
+          谁就更有可能赢得可持续发展的优势。
+        </p>
+      </div>
+      <p class="body-text animate-fade-up delay-5" style="margin-top: clamp(32px, 5vw, 48px); text-align: center;">
+        字节的10级阶梯，<br>
+        <span class="highlight-text">既是给员工的成长地图，也是数字经济时代人力资源治理的新范式。</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     SLIDE 28: 感谢
+     =========================================== -->
+<div class="slide" id="slide-28">
+  <div class="slide-content center-content">
+    <div class="max-width">
+      <h1 class="hero-title animate-fade-up">感谢聆听</h1>
+      <div class="divider animate-fade-up delay-2"></div>
+      <p class="h3-title animate-fade-up delay-3" style="color: var(--text-secondary); font-weight: 400; margin-top: 24px;">
+        欢迎提问与讨论
+      </p>
+      <div class="animate-fade-up delay-4" style="margin-top: 60px;">
+        <p class="small-text">数字人力资源管理 · 课程汇报</p>
+        <p class="small-text" style="margin-top: 8px; color: var(--text-secondary);">
+          字节跳动职级与薪酬体系变革分析
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================================
+     NAVIGATION DOTS
+     =========================================== -->
+<div class="nav-dots" id="navDots"></div>
+
+<!-- ===========================================
+     PAGE INDICATOR
+     =========================================== -->
+<div class="page-indicator">
+  <span id="currentPage">1</span> / <span id="totalPages">29</span>
+</div>
+
+<script>
+  // Navigation
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const navDots = document.getElementById('navDots');
+  const currentPageEl = document.getElementById('currentPage');
+  const totalPagesEl = document.getElementById('totalPages');
+
+  // Create nav dots
+  totalPagesEl.textContent = totalSlides;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i + 1));
+    navDots.appendChild(dot);
+  });
+
+  let currentSlide = 1;
+
+  function goToSlide(n) {
+    if (n < 1 || n > totalSlides) return;
+    currentSlide = n;
+    slides[n - 1].scrollIntoView({ behavior: 'smooth' });
+    updateNav();
+  }
+
+  function updateNav() {
+    document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+      dot.classList.toggle('active', i + 1 === currentSlide);
+    });
+    currentPageEl.textContent = currentSlide;
+
+    // Trigger animations
+    const currentSlideEl = slides[currentSlide - 1];
+    currentSlideEl.querySelectorAll('.animate-fade-up, .animate-scale-in').forEach(el => {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = null;
+    });
+  }
+
+  // Scroll detection
+  let scrollTimeout;
+  window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const scrollPos = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const newSlide = Math.round(scrollPos / windowHeight) + 1;
+      if (newSlide !== currentSlide && newSlide >= 1 && newSlide <= totalSlides) {
+        currentSlide = newSlide;
+        updateNav();
+      }
+    }, 50);
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (currentSlide < totalSlides) goToSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (currentSlide > 1) goToSlide(currentSlide - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      goToSlide(1);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      goToSlide(totalSlides);
+    }
+  });
+
+  // Touch navigation
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentSlide < totalSlides) goToSlide(currentSlide + 1);
+      else if (diff < 0 && currentSlide > 1) goToSlide(currentSlide - 1);
+    }
+  }, { passive: true });
+
+  // Mouse wheel navigation
+  let wheelTimeout;
+  window.addEventListener('wheel', (e) => {
+    clearTimeout(wheelTimeout);
+    wheelTimeout = setTimeout(() => {
+      if (e.deltaY > 0 && currentSlide < totalSlides) goToSlide(currentSlide + 1);
+      else if (e.deltaY < 0 && currentSlide > 1) goToSlide(currentSlide - 1);
+    }, 50);
+  }, { passive: true });
+
+  // Edit mode (press E to toggle)
+  let editMode = false;
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'e' || e.key === 'E') {
+      editMode = !editMode;
+      document.body.style.cursor = editMode ? 'text' : 'default';
+      if (editMode) {
+        document.querySelectorAll('.slide-content').forEach(el => {
+          el.style.contentEditable = 'true';
+        });
+      } else {
+        document.querySelectorAll('.slide-content').forEach(el => {
+          el.style.contentEditable = 'false';
+        });
+      }
+    }
+  });
+
+  // Save to localStorage on Ctrl+S
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 's') {
+      e.preventDefault();
+      const content = document.documentElement.outerHTML;
+      const blob = new Blob([content], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = '数字人力资源管理-字节跳动职级薪酬变革.html';
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  });
+</script>
+
+</body>
+</html>
